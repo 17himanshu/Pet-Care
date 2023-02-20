@@ -1,0 +1,80 @@
+*{
+    font-family: 'Baloo Bhai 2', cursive;
+}
+#title-text {
+    font-size: 25px;
+    color: #198754;
+}
+
+#title-logo-div {
+    display: flex;
+    justify-content: space-evenly
+
+}
+
+#title-btn-div {
+display: flex;
+justify-content: space-evenly
+}
+
+#user-signup{
+    width: 80px; height: 80px;
+    margin: auto; background-image: url(../pics/loginpic.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px gray solid; border-radius: 50%; margin-top:10px;
+}
+#user-login{
+    width: 80px; height: 80px;
+    background-position: center;
+    background-size: 80%;
+    margin: auto; background-image: url(../pics/userlogin.png);
+    background-repeat: no-repeat;
+    border: 2px gray solid; border-radius: 50%; margin-top:10px;
+}
+
+#res{
+    color: green;
+}
+
+#title-img-div{
+    width:100%;
+    height:540px;
+    background-size:101%;
+    background-image: url(../pics/manypetsbanner.jpg);
+    background-repeat:no-repeat ;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 15px;
+}
+
+.masthead {
+    background-size: cover;
+    min-height: 89.5vh;
+    position: relative;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0,0,0,.5);
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+.color-overlay {
+    position: absolute;
+    background-color: rgba(0,0,0,0.3);
+    height: 100%;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .masthead {
+        min-height: 30vh;font-size: 25px;
+    }
+    h1 {
+        font-size: calc(1.525rem + 3.3vw);
+    }
+}
+

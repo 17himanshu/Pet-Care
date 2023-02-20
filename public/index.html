@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PetSitter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(
+            function () {
+                $("#txtEmail").blur(function () {
+                    var custEmail = $("#txtEmail").val();
+
+                    var infoObj = {
+                        type: "get",
+                        url: "/checkEmailInTable",
+                        data: {
+                            emailForServer: custEmail
+                        }
+                    }
+                    $.ajax(infoObj).done(function (msg) {
+                        $("#res").html(msg);
+                    }).fail(function (err) {
+                        alert(err);
+                    })
+
+                });
+                $("#signup-btn").click(function () {
+                    var x = $("#txtEmail").val();
+                    var y = $("#txtPwd").val();
+                    var z = $("#signup-combo").val();
+
+
+                    var infoObj = {
+                        type: "get",
+                        url: "/signup-process-get",
+                        data: {
+                            emailForServer: x,
+                            pwdForServer: y,
+                            typeForServer: z,
+                        }
+                    }
+                    $.ajax(infoObj).done(function (msg) {
+                        $("#res-signup-btn").html(msg);
+                    }).fail(function (err) {
+                        $("#res-signup-btn").html("");
+
+                    })
+                });
+                $("#login-btn").click(function () {
+                    var x = $("#txtEmail2").val();
+                    var y = $("#txtPwd2").val();
+
+                    var infoObj = {
+                        type: "get",
+                        url: "/login-process-get",
+                        data: {
+                            emailForServer: x,
+                            pwdForServer: y,
+                        }
+                    }
+                    $.ajax(infoObj).done(function (msg) {
+                        if (msg == "client")
+                            location.href = "dash-client.html";
+                        else
+                            if (msg == "user")
+                                location.href = "dash-caretaker.html";
+
+                            else
+                                $("#res-login-btn").html(msg);
+                    }).fail(function (msg) {
+                        // $("#res-login-btn").html("Invalid email or password");
+                        addAlert("Invalid Email Id or Password");
+                    })
+                });
+            }
+        );
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="pics/pawprint.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <span id="title-text">Pet Sitter</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="masthead" style="background-image: url('pics/manypetsbanner.jpg');">
+
+        <div class="color-overlay d-flex flex-column justify-content-center align-items-center">
+            <h1>Your pets, our priority</h1>
+            <div>
+                <button type="button" class="btn btn-light btn-lg m-2" data-bs-toggle="modal"
+                    data-bs-target="#loginModal">Login</button>
+                <button type="button" class="btn btn-light btn-lg" data-bs-toggle="modal"
+                    data-bs-target="#signupModal">SignUp
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="row g-3">
+                <div class="col-md-12 d-flex justify-content-center align-items-center">
+                    <span class="mt-4">
+                        <h2>Our Services</h2>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="container container-fluid card-group mt-3">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="container">
+                            <img src="pics/users.jpg" class="card-img-top img mt-3" id="img-1" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <center>
+                                <a href="user-manager.html" class="btn btn-outline-success">Find CareTaker</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="container">
+                            <img src="pics/users.jpg" class="card-img-top img mt-3" id="img-1" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <center>
+                                <a href="user-manager.html" class="btn btn-outline-success">24/7 Support</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="container">
+                            <img src="pics/users.jpg" class="card-img-top img mt-3" id="img-1" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <center>
+                                <a href="user-manager.html" class="btn btn-outline-success">Door to Door Service</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+
+
+
+
+        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title fs-5" id="exampleModalLabel">SignUp</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="user-signup"></div>
+                        <form>
+                            <div class="mb-2">
+                                <label for="emailid" class="col-form-label">Email Id:</label>
+                                <span id=res>*</span>
+                                <input type="email" class="form-control" name="txtEmail" id="txtEmail">
+                            </div>
+                            <div class="mb-2">
+                                <label for="pwd" class="col-form-label">Password:</label>
+                                <input type="password" class="form-control" name="txtPwd" id="txtPwd">
+                            </div>
+                            <div class="mb-2">
+                                <label for="userType" class="col-form-label">User Type:</label>
+                                <select class="form-select" name="signup-combo" id="signup-combo">
+                                    <option selected>Select</option>
+                                    <option value="user">User</option>
+                                    <option value="caretaker">Care Taker</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-outline-success" id="signup-btn">Sign Up</button>
+                        <span id="res-signup-btn"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title fs-5" id="exampleModalLabel">Login</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="user-login"></div>
+                        <form>
+                            <div class="mt-2" id="alerts"></div>
+                            <div class="mb-2">
+                                <label for="emailid" class="col-form-label">Email Id:</label>
+                                <input type="email" class="form-control" id="txtEmail2">
+                            </div>
+                            <div class="mb-2">
+                                <label for="pwd" class="col-form-label">Password:</label>
+                                <input type="password" class="form-control" id="txtPwd2">
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-outline-success" id="login-btn">Login</button>
+                        <span id="res-login-btn"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
