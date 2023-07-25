@@ -2,8 +2,10 @@
     font-family: 'Baloo Bhai 2', cursive;
 }
 #title-text {
-    font-size: 25px;
-    color: #198754;
+    font-size: 30px;
+    color: #00bd56;
+    /* color: black; */
+    font-weight: bold;
 }
 
 #title-logo-div {
@@ -77,4 +79,85 @@ h1 {
         font-size: calc(1.525rem + 3.3vw);
     }
 }
+.navbar{
+    background-color: #ffffff;
+}
+.navbar ul li a{
+    color: black;
+    font-size: 17px;
+}
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    position: relative;
+}
+.navbar ul li::after{
+    content: '';
+    height:3px;
+    width: 0;
+    background: #00bd56;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    transition: 0.5s;
+}
+.navbar ul li:hover::after{
+    width:100%;
+    /* color: white; */
+}
+.nav-link:hover{
+    color: #00bd56;
+    cursor: pointer;
+    /* scale: 1.2; */
+}
+.navbar-toggler .navbar-toggler-icon {
+    display: block;
+    width: 15px;
+    height: 20px;
+    border-radius: 2px;
+}
+.services{
+    background:#f8f9fd
+}
 
+.cta-btn{
+    background-color: #00bd56;
+    color:white;
+    border: 0;
+}
+.services .card span{
+    color: #00bd56;
+}
+.services .card{
+    border: 1px solid #00bd56;
+    cursor:pointer;
+}
+.services .card:hover{
+    box-shadow: 0px 0px 15px #00bd56;
+    /* border:1px solid #00bd56; */
+}
+.services img{
+    aspect-ratio: 16/9;
+}
+footer{
+    background: #f8f9fd;
+}
+
+#contact-txt{
+    color: #00bd56;;
+}
+.fab{
+    color: rgb(69, 67, 67);
+}
+.fab:hover{
+    scale: 1.1;
+}
+#footer-txt{
+    color: #00bd56;
+}
+.team .card{
+     box-shadow:2px 2px 5px #00bd56 ;
+}
+.team .card:hover{
+    box-shadow: none;
+}

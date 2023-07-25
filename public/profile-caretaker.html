@@ -4,12 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="pics/pawprint.png">
     <title>Caretaker Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="css/profile-client.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/profile-caretaker.css">
     <script src="js/profile-caretaker.js"></script>
     <script src="js/cities.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -21,9 +23,8 @@
             document.getElementById("idpicPrev").src = (window.URL ? URL : webkitURL).createObjectURL(input.files[0]);
         }
 
-        $(document).ready(
-            function () {
-                $("#btn-Search").click(function (req, resp) {
+        $(document).ready(function () {
+            $("#search-btn").click(function (){
                     var custEmail = $("#caretkrEmail").val();
                     //creating object for ajax query
                     var infoObj = {
@@ -56,35 +57,70 @@
                     });
 
                 });
-            });
+            })
 
     </script>
+    <script>
+        function fetchActiveUser() {
+            if (localStorage.getItem("activeUser") == null) {
+                location.href = "index.html";
+                return;
+            }
+            var active = localStorage.getItem("activeUser");
+            //alert(active);
+            document.getElementById("caretkrEmail").value = active;
+        }
+       function logout()
+        {
+            
+            localStorage.removeItem("activeUser");
+            location.href="index.html";
+        }4
+    </script>
 </head>
 
-<body>
+<body onload="fetchActiveUser();">
 
-    <nav class="navbar">
-        <div class="container-fluid container justify-content-center">
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container container-fluid">
             <a class="navbar-brand" href="#">
-                <span id="title-text">
-                    Caretaker Profile
-                </span>
+                <img src="pics/pawprint.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <span id="title-text">Pet Sitter</span>
             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item  ps-4">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item  ps-4">
+                        <a class="nav-link">Logout</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container pt-5 pb-5">
         <form class="row g-3" enctype="multipart/form-data" method="post">
+            <div class="col-md-12 d-flex justify-content-center pb-3" id="title-txt"><span>
+                Caretaker Profile
+            </span></div>
             <input type="hidden" name="hdn" id="hdn">
 
             <div class="col-md-6">
                 <label for="caretkrEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="caretkrEmail" name="caretkrEmail">
+                <div class="d-flex">
+                    <input type="email" class="form-control me-3" id="caretkrEmail" name="caretkrEmail" readonly>
+                    <button type="button" class="btn btn-outline-success" id="search-btn">Search</button>
+                </div>
             </div>
 
-            <div class="col-md-3 mt-5">
-                <button type="button" class="btn btn-outline-success" id="btn-Search">Search</button>
-            </div>
+          
 
             <div class="col-md-6">
                 <label for="caretkrName" class="form-label">Name</label>
